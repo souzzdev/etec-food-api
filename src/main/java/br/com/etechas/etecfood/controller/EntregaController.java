@@ -45,20 +45,4 @@ public class EntregaController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Entrega> atualizar(@PathVariable Integer id, @RequestBody Entrega entregaAtualizada) {
-        Optional<Entrega> entregaOptional = entregaRepository.findById(id);
-
-        if(entregaOptional.isPresent()) {
-            Entrega entrega = entregaOptional.get();
-
-            entrega.setCep(entregaAtualizada.getCep());
-            entrega.setComplemento(entregaAtualizada.getComplemento());
-            entrega.setEndereco(entregaAtualizada.getEndereco());
-
-            entregaRepository.save(entrega);
-            return ResponseEntity.ok(entrega);
-        }
-        else return ResponseEntity.notFound().build();
-    }
-}
+    
