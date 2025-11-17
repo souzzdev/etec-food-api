@@ -28,36 +28,4 @@ public class ClienteController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente cliente){
-        Cliente novoCliente = clienteRepository.save(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
-        var cliente = clienteRepository.findById(id);
-        if(cliente.isPresent()) {
-            clienteRepository.delete(cliente.get());
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente clienteAtualizado){
-        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-
-        if(clienteOptional.isPresent()) {
-            Cliente cliente = clienteOptional.get();
-
-            cliente.setNome(clienteAtualizado.getNome());
-            cliente.setEmail(clienteAtualizado.getEmail());
-            cliente.setTelefone(clienteAtualizado.getTelefone());
-
-            clienteRepository.save(cliente);
-            return ResponseEntity.ok(cliente);
-        }
-        else return ResponseEntity.notFound().build();
-    }
-}
+    
